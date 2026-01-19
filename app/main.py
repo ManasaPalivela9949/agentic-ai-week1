@@ -10,5 +10,5 @@ from app.agent import run_agent
 
 if __name__ == "__main__":
 
-    goal = "Summarize current technology trends"
+    goal = "Explain how stock prices move"
     run_agent(goal)
