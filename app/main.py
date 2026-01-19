@@ -10,5 +10,5 @@ from app.agent import run_agent
 
 if __name__ == "__main__":
 
-    goal = "Summarize recent AI news"
+    goal = "Explain one major business headline"
     run_agent(goal)
