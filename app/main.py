@@ -1,5 +1,14 @@
+# from app.agent import run_agent
+
+# if __name__ == "__main__":
+#     goal = "Explain what is AI"
+#     run_agent(goal)
+
+
+
 from app.agent import run_agent
 
 if __name__ == "__main__":
-    goal = "Explain what an AI agent is in one sentence"
+
+    goal = "Summarize recent AI news"
     run_agent(goal)
