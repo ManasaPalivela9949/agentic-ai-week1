@@ -75,16 +75,63 @@
 
 
 
+# import requests
+ 
+# RENDER_API_URL = "https://llm-proxy-api.onrender.com/api/llm"
+ 
+# def call_llm(prompt: str) -> str:
+#     print("[LLM] Calling LLM with prompt:", prompt)
+#     response = requests.post(
+#         RENDER_API_URL,
+#         json={"prompt": prompt}
+#     )
+#     result = response.json()["response"]
+#     print("[LLM] Response received")
+#     return result
+
+
+
 import requests
- 
+
 RENDER_API_URL = "https://llm-proxy-api.onrender.com/api/llm"
- 
+
 def call_llm(prompt: str) -> str:
     print("[LLM] Calling LLM with prompt:", prompt)
-    response = requests.post(
-        RENDER_API_URL,
-        json={"prompt": prompt}
-    )
-    result = response.json()["response"]
-    print("[LLM] Response received")
-    return result
+
+    try:
+        response = requests.post(
+            RENDER_API_URL,
+            json={"prompt": prompt},
+            timeout=10
+        )
+
+        # Check HTTP status
+        if response.status_code != 200:
+            print("[LLM] API error. Status:", response.status_code)
+            print("[LLM] Raw response:", response.text)
+            return "LLM_FAILED"
+
+        # Try parsing JSON safely
+        try:
+            data = response.json()
+        except ValueError:
+            print("[LLM] Response is not valid JSON")
+            print("[LLM] Raw response:", response.text)
+            return "LLM_FAILED"
+
+        # Safely get response text
+        result = data.get("response")
+        if not result:
+            print("[LLM] 'response' field missing in JSON")
+            print("[LLM] Full JSON:", data)
+            return "LLM_FAILED"
+
+        print("[LLM] Response received")
+        return result
+
+    except requests.exceptions.RequestException as e:
+        print("[LLM] Network or request error:", e)
+        return "LLM_FAILED"
+
+
+

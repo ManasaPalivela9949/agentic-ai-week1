@@ -20,8 +20,15 @@
 #     run_agent(goal)
 
 
+# from app.agent import run_agent
+ 
+# if __name__ == "__main__":
+#     goal = "Explain why humor improves communication"
+#     run_agent(goal)
+
+
 from app.agent import run_agent
  
 if __name__ == "__main__":
-    goal = "Explain why humor improves communication"
+    goal = "Product prices from Amazon"
     run_agent(goal)
