@@ -1,3 +1,4 @@
+
 # # Tools will be added in Week 2
 
 
@@ -120,3 +121,5 @@ def market_explainer_tool(text: str) -> str:
     print(text)
     return "EXPLANATION_PRESENTED"
  
+
+
