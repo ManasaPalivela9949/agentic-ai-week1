@@ -81,35 +81,58 @@
 
 
 
+# def decide_next_step(memory: dict) -> str:
+#     print("\n[CONTROL] Current memory:", memory)
+ 
+#     if memory["completed"]:
+
+#         return "stop"
+ 
+#     # Step 1: Get explanation from LLM
+#     if len(memory["steps"]) == 0:
+#         return "call_llm"
+ 
+#     # Step 2: Present explanation using tool
+#     if len(memory["steps"]) == 1:
+#         return "use_tool"
+ 
+#     # Step 3: Stop agent
+
+#         print("[CONTROL] completed=True → STOP")
+#         return "stop"
+ 
+#     if len(memory["steps"]) == 0:
+#         print("[CONTROL] First step → CALL LLM")
+#         return "call_llm"
+ 
+#     if len(memory["steps"]) == 1:
+#         print("[CONTROL] Second step → USE TOOL")
+#         return "use_tool"
+ 
+#     print("[CONTROL] All steps done → STOP")
+
+#     memory["completed"] = True
+#     return "stop"
+
+
+'''
+Assignment on Build an agent that explains a college notice
+in simple language
+
+'''
+
 def decide_next_step(memory: dict) -> str:
-    print("\n[CONTROL] Current memory:", memory)
- 
-    if memory["completed"]:
+    steps = memory["steps"]
 
-        return "stop"
- 
-    # Step 1: Get explanation from LLM
-    if len(memory["steps"]) == 0:
-        return "call_llm"
- 
-    # Step 2: Present explanation using tool
-    if len(memory["steps"]) == 1:
-        return "use_tool"
- 
-    # Step 3: Stop agent
+    if not steps:
+        return "read_notice"
 
-        print("[CONTROL] completed=True → STOP")
-        return "stop"
- 
-    if len(memory["steps"]) == 0:
-        print("[CONTROL] First step → CALL LLM")
-        return "call_llm"
- 
-    if len(memory["steps"]) == 1:
-        print("[CONTROL] Second step → USE TOOL")
-        return "use_tool"
- 
-    print("[CONTROL] All steps done → STOP")
+    last_step = steps[-1]
 
-    memory["completed"] = True
+    if last_step == "read_notice":
+        return "explain_notice"
+
+    if last_step == "explain_notice":
+        return "present_explanation"
+
     return "stop"

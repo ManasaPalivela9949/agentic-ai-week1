@@ -46,9 +46,7 @@ def init_memory(goal: str) -> dict:
         "goal": goal,
         "steps": [],
         "completed": False
-<<<<<<< HEAD
+
     }
 
-=======
-    }
->>>>>>> main
+
